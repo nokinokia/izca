@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IZCA</title>
+    <link rel="icon" type="image/x-icon" href="assets/V3.jpg">
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+
+        body {
+            font-family: "Gochi Hand", cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        .custom-bg {
+            background-color: #dcdfd6;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            overflow: hidden;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Centers content vertically */
+            align-items: flex-end;
+            /* Aligns content to the right */
+            margin-right: 30px;
+            /* Sets right margin */
+            height: 100vh;
+            /* Full viewport height to center vertically */
+            text-align: right;
+            /* Align text to the right */
+        }
+
+        .hero-content .button-group {
+            display: flex;
+            gap: 10px;
+            /* Space between buttons */
+        }
+
+        .hero-content .hero-bottom-text {
+            position: absolute;
+            /* Positioning at the bottom */
+            bottom: 0;
+            /* Bottom of the container */
+            right: 0;
+            /* Align to the right */
+            margin-right: 30px;
+            /* Margin on the right */
+            width: calc(100% - 30px);
+            /* Adjust width to fit within the container */
+        }
+
+        .button-group {
+            margin-top: 2rem;
+        }
+
+        .button-group a {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            color: rgb(51, 40, 40);
+            background-color: rgb(41, 169, 255);
+            border: 4px solid rgb(65, 125, 255);
+            border-radius: 0.5rem;
+            text-shadow: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .button-group a:hover {
+            background-color: rgb(38, 127, 185);
+            transform: translateY(-2px);
+        }
+
+        .parallax {
+            background-image: url('assets/parallax.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meme-gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 70px 0 70px 0;
+        }
+
+        @media (max-width: 640px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.25rem;
+            }
+        }
+
+        .card-container {
+            position: relative;
+            width: 350px;
+            /* Adjust based on card size */
+            height: 450px;
+            /* Adjust based on card size */
+            margin: 0 auto;
+            perspective: 1000px;
+            /* For 3D effect */
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+
+        .card:nth-child(1) {
+            transform: rotate(-15deg) translate(-30px, -10px);
+            z-index: 1;
+        }
+
+        .card:nth-child(2) {
+            transform: rotate(0deg);
+            z-index: 2;
+        }
+
+        .card:nth-child(3) {
+            transform: rotate(15deg) translate(30px, -10px);
+            z-index: 1;
+        }
+
+        .card:nth-child(4) {
+            transform: rotate(25deg) translate(30px, -10px);
+            z-index: 1;
+        }
+
+        .footer {
+            background-color: #1E90FF;
+            /* Blue background color */
+            color: white;
+            /* White text color */
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: white;
+            /* White link color */
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .footer-links {
+            margin: 10px 0;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        .meme-gallery {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s linear;
+            will-change: transform;
+        }
+
+        .carousel-item {
+            min-width: 200px;
+            /* Set this to control how many items are visible at once */
+            flex: 0 0 auto;
+            /* Prevent items from shrinking */
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            max-height: 200px;
+            /* Max height for images */
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero">
+        <video autoplay muted loop>
+            <source src="assets/hero.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="text-5xl font-bold glowing-text">$IZCA</h1>
+            <p class="mt-4 glowing-text">Meet our Walmart wanderer, the kitten with the catwalk confidence!</p>
+            <div class="button-group">
+                <a href="https://x.com/izzy_solana" target="_blank">X.COM</a>
+                <a href="https://t.me/izzy_portal" target="_blank">Telegram</a>
+            </div>
+            <div class="hero-bottom-text">
+                <p>CA: XXXXXXXXXXXXXXXX</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="mx-auto">
+        <div class="container mx-auto">
+            <section class="about mt-10 text-center sm:flex sm:justify-between sm:items-center sm:h-screen">
+                <div class="flex-shrink-0 w-full sm:w-1/2">
+                    <div class="card-container">
+                        <img src="assets/V2.jpg" alt="Card Image 1" class="card">
+                        <img src="assets/logo.jpg" alt="Card Image 2" class="card">
+                        <img src="assets/V3.jpg" alt="Card Image 3" class="card">
+                        <img src="assets/V5.jpg" alt="Card Image 3" class="card">
+                    </div>
+                </div>
+                <div class="flex-grow mt-6 sm:mt-0 sm:ml-6 text-center sm:text-left">
+                    <h2 class="text-2xl font-bold mb-2">$IZCA</h2>
+                    <p class="text-lg text-gray-700 mb-4">She loved to inspect
+                        every new item that appeared in her home, from the groceries brought in each week to the
+                        packages delivered to the door. With each discovery, she'd pause, sniff, and sometimes give a
+                        little paw tap, as if to say, "Is this worthy of my attention?" Her playful antics and
+                        inquisitive nature brought joy and laughter to her family, who adored her curious spirit.</p>
+                    <p class="text-lg text-gray-700 mb-6">CA: SOON AFTER LAUNCH</p>
+                    <div class="button-group">
+                        <a href="https://pump.fun/ARRQxk19558mCuYQ9ZbycKF26QeV8Ju4hRLjV6dMpump" target="_blank">Pump.Fun</a>
+                        <a href="https://x.com/izzy_solana" target="_blank">X.COM</a>
+                        <a href="https://t.me/izzy_portal" target="_blank">Telegram</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="parallax py-16">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-6">
+                    <div class="step flex flex-col items-center">
+                        <img src="assets/1.png" alt="Meme 1" class="w-full object-cover rounded-lg mb-4">
+                    </div>
+                    <div class="step flex flex-col items-center">
+                        <img src="assets/2.png" alt="Meme 1" class="w-full object-cover rounded-lg mb-4">
+                    </div>
+                    <div class="step flex flex-col items-center">
+                        <img src="assets/3.png" alt="Meme 1" class="w-full object-cover rounded-lg mb-4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="meme-gallery">
+            <div class="carousel-container">
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V1.jpg" alt="Meme 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V2.jpg" alt="Meme 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V3.jpg" alt="Meme 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/V5.jpg" alt="Meme 4">
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://pump.fun/ARRQxk19558mCuYQ9ZbycKF26QeV8Ju4hRLjV6dMpump">Pump.Fun</a>
+            <a href="https://t.me/izzy_portal">Telegram</a>
+            <a href="https://x.com/izzy_solana">X.COM</a>
+        </div>
+        <p>&copy; 2024 IZCA.</p>
+    </footer>
+
+    <script>
+        const carouselContainer = document.querySelector('.carousel-container');
+        let offset = 0;
+
+        function moveCarousel() {
+            offset -= 1; // Speed of the carousel
+            if (offset <= -carouselContainer.scrollWidth / 2) {
+                offset = 0;
+            }
+            carouselContainer.style.transform = `translateX(${offset}px)`;
+            requestAnimationFrame(moveCarousel);
+        }
+
+        moveCarousel(); // Start the animation
+    </script>
+</body>
+
+</html>
